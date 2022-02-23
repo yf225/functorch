@@ -84,6 +84,7 @@ void decompose_functional(const c10::OperatorHandle& op, torch::jit::Stack* stac
   }
 }
 
+
 #define DECOMPOSE_FUNCTIONAL(op) \
   m.impl(#op, torch::CppFunction::makeFromBoxedFunction<&decompose_functional>());
 
@@ -222,6 +223,7 @@ TORCH_LIBRARY_IMPL(aten, FT_BATCHED_KEY, m) {
   OP_DECOMPOSE(mT);
   OP_DECOMPOSE2(multiply, Tensor );
   OP_DECOMPOSE(narrow);
+  OP_DECOMPOSE(dropout);
   OP_DECOMPOSE(negative);
   OP_DECOMPOSE(nll_loss_nd);
   OP_DECOMPOSE(nll_loss);
